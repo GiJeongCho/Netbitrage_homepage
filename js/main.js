@@ -17,7 +17,7 @@
   var WEB3FORMS_ACCESS_KEY = "57cc4300-8810-4097-89d7-a27c0b58a604";
 
   var PROGRAM_LABELS = {
-    arbitrage: "상장따리 (델타 중립 헤지)",
+    arbitrage: "무위험 차익거래 (롱·숏 양방 헤지)",
     short: "상장숏 (신규 상장 SHORT)",
     both: "두 프로그램 모두",
     etc: "기타 / 일반 문의",
