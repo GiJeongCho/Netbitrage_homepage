@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>도입 문의 | Netbitrage</title>
+  <meta name="description" content="Netbitrage 자동매매 프로그램(상장따리·상장숏) 도입 문의. 운용 목적과 환경을 남겨주시면 적합한 프로그램과 운영 방식을 안내해 드립니다." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html"><span class="dot"></span>Netbitrage</a>
+      <button class="nav-toggle" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+      <nav class="nav">
+        <a href="index.html">홈</a>
+        <a href="arbitrage.html">상장따리</a>
+        <a href="short.html">상장숏</a>
+        <a href="contact.html" class="active">문의</a>
+        <a href="contact.html" class="btn btn--primary">도입 문의</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <p class="breadcrumb"><a href="index.html">홈</a> / 문의</p>
+        <span class="eyebrow">Contact</span>
+        <h1>도입 <span class="gradient-text">문의하기</span></h1>
+        <p class="lead">
+          운용 목적과 환경을 남겨주시면, 어떤 프로그램이 맞는지와 운영 방식을 메일로 안내해 드립니다.
+          세부 전략·소스코드는 공개하지 않으니 양해 부탁드립니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="contact-wrap">
+          <div class="contact-info reveal">
+            <h2>문의 안내</h2>
+            <p>아래 폼으로 보내주시면 등록된 메일로 전달됩니다. 직접 메일을 보내셔도 됩니다.</p>
+            <ul class="contact-list">
+              <li>
+                <span class="ico">✉️</span>
+                <span>
+                  <span class="k">이메일</span><br />
+                  <a class="v" href="mailto:a01095895690@gmail.com">a01095895690@gmail.com</a>
+                </span>
+              </li>
+              <li>
+                <span class="ico">🧭</span>
+                <span>
+                  <span class="k">상담 가능 내용</span><br />
+                  <span class="v">프로그램 적합성 · 운영 방식 · 도입 절차</span>
+                </span>
+              </li>
+              <li>
+                <span class="ico">🔒</span>
+                <span>
+                  <span class="k">공개 범위</span><br />
+                  <span class="v">전략 세부 파라미터 · 소스코드 비공개</span>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="reveal">
+            <form id="contact-form" class="form-card" novalidate>
+              <div id="form-success" class="form-msg success">문의가 정상적으로 전송되었습니다. 빠르게 회신드리겠습니다.</div>
+              <div id="form-error" class="form-msg error">전송에 실패했습니다. 잠시 후 다시 시도해 주세요.</div>
+
+              <!-- 허니팟(봇 차단) -->
+              <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+
+              <div class="field">
+                <label for="name">이름 / 닉네임 *</label>
+                <input type="text" id="name" name="name" required placeholder="홍길동" />
+              </div>
+              <div class="field">
+                <label for="email">이메일 *</label>
+                <input type="email" id="email" name="email" required placeholder="you@example.com" />
+              </div>
+              <div class="field">
+                <label for="phone">연락처 (선택)</label>
+                <input type="text" id="phone" name="phone" placeholder="010-0000-0000 / 텔레그램 @id 등" />
+              </div>
+              <div class="field">
+                <label for="program">관심 프로그램</label>
+                <select id="program" name="program">
+                  <option value="both">두 프로그램 모두</option>
+                  <option value="arbitrage">상장따리 (델타 중립 헤지)</option>
+                  <option value="short">상장숏 (신규 상장 SHORT)</option>
+                  <option value="etc">기타 / 일반 문의</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="message">문의 내용 *</label>
+                <textarea id="message" name="message" required placeholder="운용 목적, 사용 거래소, 자본 규모대, 궁금한 점 등을 자유롭게 적어주세요."></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary btn--block">문의 보내기</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="container">
+        <div class="notice reveal">
+          <p><strong>투자 위험 고지</strong> · 모든 자동매매는 원금 손실 위험이 있으며 수익을 보장하지 않습니다. 본 문의는 정보 제공 및 소프트웨어 소개를 위한 것으로, 투자 권유가 아닙니다.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html"><span class="dot"></span>Netbitrage</a>
+          <p>신규 상장 이벤트를 노리는 자동매매 트레이딩 솔루션. 속도·자동화·리스크 관리에 집중합니다.</p>
+        </div>
+        <div class="footer-col">
+          <h4>프로그램</h4>
+          <ul>
+            <li><a href="arbitrage.html">상장따리 (헤지 차익)</a></li>
+            <li><a href="short.html">상장숏 (단기 SHORT)</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>바로가기</h4>
+          <ul>
+            <li><a href="index.html">홈</a></li>
+            <li><a href="contact.html">도입 문의</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-disclaimer">
+        본 서비스는 정보 제공 및 소프트웨어 소개를 목적으로 하며, 투자자문업·투자일임업 또는 금융투자상품 권유에 해당하지 않습니다.
+        과거의 성과가 미래의 수익을 보장하지 않으며, 모든 거래의 최종 책임은 이용자에게 있습니다.
+      </p>
+      <div class="footer-bottom">
+        <span>© <span id="year">2026</span> Netbitrage. All rights reserved.</span>
+        <span>신규 상장 자동매매 솔루션</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

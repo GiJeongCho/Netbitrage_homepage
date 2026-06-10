@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>상장따리 | 델타 중립 헤지 차익 — Netbitrage</title>
+  <meta name="description" content="업비트 신규 상장 시 거래소 간 가격 갭을 방향성 베팅 없이 잡는 델타 중립 헤지 차익 자동매매. 양쪽을 동시에 잡아 갭 수렴분을 수익화하고 꼬리 리스크를 차단합니다." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html"><span class="dot"></span>Netbitrage</a>
+      <button class="nav-toggle" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+      <nav class="nav">
+        <a href="index.html">홈</a>
+        <a href="arbitrage.html" class="active">상장따리</a>
+        <a href="short.html">상장숏</a>
+        <a href="contact.html">문의</a>
+        <a href="contact.html" class="btn btn--primary">도입 문의</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <p class="breadcrumb"><a href="index.html">홈</a> / 상장따리</p>
+        <span class="eyebrow">Delta-Neutral Hedge Arbitrage</span>
+        <h1>방향성에 베팅하지 않는<br /><span class="gradient-text">헤지 차익</span> 전략</h1>
+        <p class="lead">
+          업비트 신규 상장 시 거래소 사이에 잠깐 벌어지는 가격 갭을, 가격이 오를지 내릴지
+          맞히지 않고도 가져갑니다. 양쪽을 동시에 잡아 갭이 좁혀질 때 그 차이만큼 수익을 실현합니다.
+        </p>
+        <div class="hero-actions">
+          <a href="contact.html?program=arbitrage" class="btn btn--primary">상장따리 도입 문의</a>
+          <a href="short.html" class="btn btn--ghost">상장숏도 보기</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 왜 되는가 -->
+    <section class="section section--soft">
+      <div class="container">
+        <div class="prose reveal">
+          <span class="eyebrow">Why it works</span>
+          <h2 style="margin-top:8px">왜 기회가 생기는가</h2>
+          <p>
+            업비트가 새 코인을 상장하면 한국 시장의 매수세가 짧게 몰리며, 같은 코인이라도
+            거래소마다 가격이 잠시 달라집니다. 한쪽이 다른 쪽보다 비싸지는 <strong>가격 갭</strong>이
+            발생하고, 이 갭은 짧게는 수십 초에서 길게는 수 시간까지 유지되다가 결국 한 점으로 수렴합니다.
+          </p>
+          <p>
+            상장따리는 이 갭이 벌어진 순간 <strong>싼 쪽을 매수하고 비싼 쪽을 매도</strong>해
+            양쪽을 동시에 잡습니다. 가격이 오르든 내리든 한쪽의 이익이 다른 쪽의 손실을 상쇄하므로,
+            <strong>남는 것은 갭이 좁혀진 만큼의 차익</strong>뿐입니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 델타 중립 직관 -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Delta Neutral</span>
+          <h2>양쪽을 동시에 — 델타 중립</h2>
+          <p>한쪽은 매수(LONG), 다른 쪽은 매도(SHORT). 두 포지션이 서로를 헤지합니다.</p>
+        </div>
+        <div class="hedge reveal">
+          <div class="leg long">
+            <span class="label">업비트 현물 · LONG</span>
+            <h4>매수</h4>
+            <p>상대적으로 가격이 낮은 업비트에서 현물을 매수합니다. 가격이 오르면 이쪽에서 이익이 납니다.</p>
+            <p class="fig">자본 <b>C</b> 전액 투입</p>
+          </div>
+          <div class="plus">+</div>
+          <div class="leg short">
+            <span class="label">바이낸스 선물 · SHORT</span>
+            <h4>매도</h4>
+            <p>상대적으로 가격이 높은 바이낸스 USDT-M 선물에서 같은 수량을 공매도합니다. 가격이 내리면 이쪽에서 이익이 납니다.</p>
+            <p class="fig">증거금 <b>C / 10</b> · 레버리지 <b>10배</b> → 노미널 = C</p>
+          </div>
+        </div>
+        <div class="prose reveal" style="margin:32px auto 0; text-align:center; max-width:680px">
+          <p>
+            <strong>자본 비율 1 : 10 + 레버리지 10배</strong>로 양쪽 노미널(코인 수량)이 같아집니다.
+            그래서 코인 가격이 어느 방향으로 움직이든 두 포지션의 손익이 거의 상쇄됩니다.
+            <strong>수익은 갭이 좁혀지는 데서 나오고, 방향성 리스크는 0 에 가깝습니다.</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 전략 파라미터 -->
+    <section class="section section--soft" id="params">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Parameters</span>
+          <h2>전략 파라미터</h2>
+          <p>아래는 기본값이며, 운용 환경과 목표에 맞춰 조정할 수 있습니다.</p>
+        </div>
+        <div class="grid grid--3 reveal">
+          <div class="param"><strong>1 : 10</strong><span>자본 비율 — 업비트 현물 : 바이낸스 증거금</span></div>
+          <div class="param"><strong>10배</strong><span>바이낸스 선물 레버리지 → 양쪽 수량 일치(델타 중립)</span></div>
+          <div class="param"><strong>≥ 3%</strong><span>진입 갭 임계치 — 갭이 이만큼 벌어지면 진입</span></div>
+          <div class="param"><strong>+1.5%</strong><span>익절 — 양쪽 합산 수익률 도달 시 동시 청산</span></div>
+          <div class="param"><strong>80%</strong><span>손절 — SHORT 증거금 손실 한도(마진콜 회피)</span></div>
+          <div class="param"><strong>1일</strong><span>최대 보유 — 미수렴 시 자동 시장가 청산</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 자동화 흐름 -->
+    <section class="section section--soft">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">How it runs</span>
+          <h2>감지부터 청산까지 완전 자동</h2>
+          <p>사람이 차트를 지키지 않아도, 엔진이 24시간 기회를 기다립니다.</p>
+        </div>
+        <div class="flow reveal">
+          <div class="step">
+            <span class="n">1</span>
+            <h4>감지</h4>
+            <p>신규 상장과 거래소별 실시간 호가를 동시에 감시합니다.</p>
+          </div>
+          <div class="step">
+            <span class="n">2</span>
+            <h4>진입</h4>
+            <p>갭이 충분히 벌어지면 양쪽을 거의 동시에 잡아 헤지를 구성합니다.</p>
+          </div>
+          <div class="step">
+            <span class="n">3</span>
+            <h4>모니터링</h4>
+            <p>갭 수렴과 손익을 실시간 추적하며 리스크를 통제합니다.</p>
+          </div>
+          <div class="step">
+            <span class="n">4</span>
+            <h4>청산</h4>
+            <p>목표에 도달하거나 조건이 충족되면 양쪽을 동시에 정리합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 꼬리 리스크 -->
+    <section class="section">
+      <div class="container">
+        <div class="grid grid--2" style="align-items:center">
+          <div class="prose reveal">
+            <span class="eyebrow">Tail Risk</span>
+            <h2 style="margin-top:8px">급등·급락에도 흔들리지 않게</h2>
+            <p>
+              상장 직후의 변동성은 매우 큽니다. 한 방향에만 베팅했다면 예상과 반대로 움직일 때
+              큰 손실이 날 수 있습니다.
+            </p>
+            <p>
+              상장따리는 양쪽을 동시에 들고 있기 때문에, 코인이 크게 오르면 매수 쪽이,
+              크게 내리면 매도 쪽이 이를 받아냅니다. <strong>한쪽의 손실을 다른 쪽의 이익이 메워
+              꼬리 리스크를 구조적으로 막습니다.</strong>
+            </p>
+          </div>
+          <div class="reveal">
+            <div class="feature">
+              <div class="ico">⚖️</div>
+              <h3>구조적 헤지</h3>
+              <p style="margin-bottom:18px">방향성 노출을 최소화하도록 양쪽 수량을 맞춰 진입합니다.</p>
+              <div class="ico">⏱️</div>
+              <h3>시간 관리</h3>
+              <p style="margin-bottom:18px">갭이 끝내 수렴하지 않아도 일정 조건에서 자동 정리해 무한정 들고 가지 않습니다.</p>
+              <div class="ico">🚫</div>
+              <h3>한쪽 체결 보호</h3>
+              <p style="margin:0">한쪽만 체결되는 상황을 감지해 즉시 균형을 복구하도록 설계합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 리스크 고지 -->
+    <section class="section section--soft">
+      <div class="container">
+        <div class="notice reveal">
+          <p><strong>투자 위험 고지</strong> · 헤지 전략이라도 손실 가능성이 있습니다. 거래소 장애, 체결 지연, 환율·수수료 변동, 한쪽만 체결되는 상황 등으로 손실이 발생할 수 있으며, 수익을 보장하지 않습니다. 본 내용은 정보 제공 목적입니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-banner reveal">
+          <h2>상장따리, 내 환경에 맞을까요?</h2>
+          <p>운용 자본·거래소 환경을 알려주시면 적합 여부와 운영 방식을 안내해 드립니다.</p>
+          <a href="contact.html?program=arbitrage" class="btn btn--primary">메일로 문의하기</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html"><span class="dot"></span>Netbitrage</a>
+          <p>신규 상장 이벤트를 노리는 자동매매 트레이딩 솔루션. 속도·자동화·리스크 관리에 집중합니다.</p>
+        </div>
+        <div class="footer-col">
+          <h4>프로그램</h4>
+          <ul>
+            <li><a href="arbitrage.html">상장따리 (헤지 차익)</a></li>
+            <li><a href="short.html">상장숏 (단기 SHORT)</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>바로가기</h4>
+          <ul>
+            <li><a href="index.html">홈</a></li>
+            <li><a href="contact.html">도입 문의</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-disclaimer">
+        본 서비스는 정보 제공 및 소프트웨어 소개를 목적으로 하며, 투자자문업·투자일임업 또는 금융투자상품 권유에 해당하지 않습니다.
+        과거의 성과가 미래의 수익을 보장하지 않으며, 모든 거래의 최종 책임은 이용자에게 있습니다.
+      </p>
+      <div class="footer-bottom">
+        <span>© <span id="year">2026</span> Netbitrage. All rights reserved.</span>
+        <span>신규 상장 자동매매 솔루션</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
