@@ -150,6 +150,8 @@ h3 { font-size: 1.2rem; }
   background: var(--accent);
   box-shadow: 0 0 14px var(--accent);
 }
+.logo-img { height: 30px; width: auto; display: block; }
+.site-footer .logo-img { height: 28px; }
 .nav { display: flex; align-items: center; gap: 28px; }
 .nav a { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; transition: color 0.15s; }
 .nav a:hover, .nav a.active { color: var(--text); }
