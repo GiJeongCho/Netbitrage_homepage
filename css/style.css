@@ -429,6 +429,9 @@ h3 { font-size: 1.2rem; }
 .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 40px; margin-bottom: 36px; }
 .footer-grid .logo { margin-bottom: 14px; }
 .footer-grid p { color: var(--text-muted); font-size: 0.92rem; max-width: 320px; }
+.footer-contact { margin-top: 14px; font-size: 0.92rem; }
+.footer-contact a { color: var(--text); font-weight: 600; }
+.footer-contact a:hover { color: var(--accent); }
 .footer-col h4 { font-size: 0.95rem; margin-bottom: 16px; color: var(--text); }
 .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .footer-col a { color: var(--text-muted); font-size: 0.92rem; }
