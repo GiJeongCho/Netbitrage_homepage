@@ -23,6 +23,33 @@
     etc: "기타 / 일반 문의",
   };
 
+  /* 회신(메일 발송)이 자주 막히는 도메인 — 카카오/다음/네이트 등 국내 ISP는
+   * 외부 자동발송 메일의 SPF/DKIM 인증을 까다롭게 차단하므로 권장하지 않습니다. 
+   * 네이버는 가능합니다.
+  */
+  var BLOCKED_EMAIL_DOMAINS = [
+    "kakao.com",
+    "daum.net",
+    "hanmail.net",
+    "nate.com",
+    "korea.com",
+    "paran.com",
+    "empas.com",
+    "freechal.com",
+  ];
+
+  // 반환: { valid, blocked, domain }  (valid=형식 정상, blocked=수신 까다로운 도메인)
+  function inspectEmail(value) {
+    var email = (value || "").trim().toLowerCase();
+    var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    var domain = ok ? email.split("@")[1] : "";
+    return {
+      valid: ok,
+      blocked: ok && BLOCKED_EMAIL_DOMAINS.indexOf(domain) !== -1,
+      domain: domain,
+    };
+  }
+
   /* ---------- 1. 모바일 네비게이션 ---------- */
   function initNav() {
     var toggle = document.querySelector(".nav-toggle");
@@ -81,10 +108,38 @@
     var sel = form.querySelector("#program");
     if (sel && pre && PROGRAM_LABELS[pre]) sel.value = pre;
 
+    // 이메일 도메인 실시간 검사: 수신 까다로운 도메인이면 경고 표시
+    var emailInput = form.querySelector("#email");
+    var emailWarn = document.getElementById("email-warn");
+    var validateEmailField = function () {
+      if (!emailInput || !emailWarn) return true;
+      var info = inspectEmail(emailInput.value);
+      if (info.blocked) {
+        emailWarn.textContent =
+          "‘" + info.domain + "’ 메일은 회신이 전달되지 않을 수 있습니다. Gmail · 네이버 · Outlook 등 다른 메일을 사용해 주세요.";
+        emailWarn.classList.add("show");
+        emailInput.classList.add("invalid");
+        return false;
+      }
+      emailWarn.classList.remove("show");
+      emailInput.classList.remove("invalid");
+      return true;
+    };
+    if (emailInput) {
+      emailInput.addEventListener("input", validateEmailField);
+      emailInput.addEventListener("blur", validateEmailField);
+    }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       hide(success);
       hide(errorBox);
+
+      // 회신 불가 도메인이면 전송 차단
+      if (!validateEmailField()) {
+        if (emailInput) emailInput.focus();
+        return;
+      }
 
       if (!WEB3FORMS_ACCESS_KEY || WEB3FORMS_ACCESS_KEY.indexOf("YOUR_") === 0) {
         show(errorBox, "메일 전송 키가 아직 설정되지 않았습니다. 관리자에게 문의해 주세요.");

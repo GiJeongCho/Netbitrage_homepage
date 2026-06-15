@@ -412,6 +412,10 @@ h3 { font-size: 1.2rem; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
 .field textarea { resize: vertical; min-height: 120px; }
 .field select { appearance: none; cursor: pointer; }
+.field-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 6px; line-height: 1.5; }
+.field-warn { font-size: 0.82rem; color: var(--accent-down); margin-top: 6px; line-height: 1.5; display: none; }
+.field-warn.show { display: block; }
+.field input.invalid { border-color: var(--accent-down); }
 
 .hp { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; }
 
