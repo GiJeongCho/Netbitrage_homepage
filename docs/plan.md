@@ -47,6 +47,7 @@ js/main.js        네비 토글 / 스크롤 등장 / 문의 폼 전송 / 연도 
 | arbitrage.html | 완료 |
 | short.html (디테일 비공개 준수) | 완료 |
 | contact.html + 문의 폼 JS | 완료 |
+| performance.html (수익률/성과 리포트) | 완료 |
 | 문서 정리 (plan/content-policy/deployment/README) | 완료 |
 | 로컬 렌더/링크/폼 점검 + 비공개 검수 | 진행 |
 
@@ -59,6 +60,15 @@ js/main.js        네비 토글 / 스크롤 등장 / 문의 폼 전송 / 연도 
 - [ ] 정식 호스팅(Netlify/Cloudflare Pages 등) + 별도 도메인 연결
 
 ## 5. 변경 로그
+
+### 2026-08-26 — 수익률(성과) 페이지 추가
+- `performance.html` 신규 생성: 상장숏·무위험 차익거래 두 전략의 실측 성과를 다크테마 요약 카드로 노출.
+- 각 전략의 상세 리포트 원본을 `reports/` 로 복사해 사이트에 포함하고 iframe 임베드 + 새 창 링크 제공.
+  - `reports/listing_short_report.html` (상장숏 실거래 기록: 승률 87.5%, 누적 +224.87 USDT 등)
+  - `reports/listing_arbitrage_report.html` (무위험 차익 포워드 백테스트: 복리 +17.23%, 정합 기준 +143.4%)
+- 비공개 정책 준수: 차익 리포트의 내부 파일 경로(`trade_log.csv` 절대경로)·프로젝트명(`listing_arbitrage`)을
+  Netbitrage 브랜드 표기로 정리. 전 페이지 네비/푸터에 "수익률" 링크 추가.
+- 과거 성과 ≠ 미래 수익 고지와 측정 방식(투입마진 대비 / 슬리피지·수수료 미반영) 명시.
 
 ### 2026-06-10 — 초기 구축
 - `listing_arbitrage/docs`, `listing_short/docs` 를 참고해 두 전략을 소개하는
