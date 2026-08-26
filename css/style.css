@@ -156,6 +156,9 @@ h3 { font-size: 1.2rem; }
 .nav a { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; transition: color 0.15s; }
 .nav a:hover, .nav a.active { color: var(--text); }
 .nav .btn { padding: 9px 20px; }
+/* 네비게이션의 CTA 버튼은 밝은 그라데이션 배경이므로 회색(.nav a) 대신 버튼 본래의 진한 색을 유지 */
+.nav a.btn--primary { color: #04231a; }
+.nav a.btn--primary:hover { color: #04231a; }
 
 .nav-toggle {
   display: none;
