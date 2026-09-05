@@ -4,7 +4,6 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>무위험 차익거래 · 실시간 포워드 백테스트 리포트 — Netbitrage</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <style>
   :root {
     --bg: #0f1420; --panel: #1a2233; --panel2: #212c42; --line: #2c3a56;
@@ -30,7 +29,8 @@
   .value.pos { color: var(--pos); } .value.neg { color: var(--neg); }
   .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px; margin-bottom: 24px; }
   .panel h2 { font-size: 15px; margin: 0 0 14px; }
-  canvas { max-height: 320px; }
+  .svgchart { width: 100%; }
+  .svgchart svg { width: 100%; height: auto; display: block; }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   th, td { padding: 9px 10px; text-align: right; border-bottom: 1px solid var(--line); }
   th:first-child, td:first-child { text-align: left; }
@@ -56,7 +56,7 @@
 
   <div class="panel">
     <h2>주별 손익 (KRW)</h2>
-    <canvas id="weeklyChart"></canvas>
+    <div id="weeklyChart" class="svgchart"></div>
   </div>
 
   <div class="panel">
@@ -103,23 +103,44 @@ function renderTable(weekly) {
   document.querySelector('#weeklyTable tbody').innerHTML = rows;
 }
 
+// 외부 라이브러리 없이 순수 SVG 로 주별 손익 막대그래프를 그린다 (CDN 의존 제거).
 function renderChart(weekly) {
-  const labels = weekly.map(r => r.bucket);
+  const el = document.getElementById('weeklyChart');
+  if (!el) return;
+  const W = 900, H = 320, padL = 60, padR = 20, padT = 20, padB = 44;
   const vals = weekly.map(r => Math.round(r.cum_pnl_krw));
-  const colors = vals.map(v => v >= 0 ? '#38d39f' : '#ff6b81');
-  if (chart) chart.destroy();
-  chart = new Chart(document.getElementById('weeklyChart'), {
-    type: 'bar',
-    data: { labels, datasets: [{ data: vals, backgroundColor: colors, borderRadius: 6 }] },
-    options: {
-      plugins: { legend: { display: false },
-        tooltip: { callbacks: { label: (c) => fmtKRW(c.raw) } } },
-      scales: {
-        x: { ticks: { color: '#93a2c0' }, grid: { display: false } },
-        y: { ticks: { color: '#93a2c0', callback: (v) => (v/10000)+'만' }, grid: { color: '#2c3a56' } }
-      }
-    }
+  const labels = weekly.map(r => r.bucket);
+  const maxV = Math.max(0, ...vals), minV = Math.min(0, ...vals);
+  const span = (maxV - minV) || 1;
+  const plotH = H - padT - padB, plotW = W - padL - padR;
+  const y0 = padT + (maxV / span) * plotH; // 0 기준선 위치
+  const n = vals.length || 1;
+  const slot = plotW / n, bw = Math.min(70, slot * 0.55);
+
+  let svg = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="주별 손익">`;
+  // 가로 그리드 + y축 라벨 (0, max, min)
+  const yticks = [maxV, maxV / 2, 0, minV / 2, minV].filter((v, i, a) => a.indexOf(v) === i);
+  yticks.forEach(v => {
+    const y = padT + ((maxV - v) / span) * plotH;
+    svg += `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W - padR}" y2="${y.toFixed(1)}" stroke="#2c3a56" stroke-width="1"/>`;
+    svg += `<text x="${padL - 8}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="11" fill="#93a2c0">${Math.round(v / 10000)}만</text>`;
   });
+  // 0 기준선 강조
+  svg += `<line x1="${padL}" y1="${y0.toFixed(1)}" x2="${W - padR}" y2="${y0.toFixed(1)}" stroke="#4a5a7d" stroke-width="1.5"/>`;
+  // 막대 + 값/라벨
+  vals.forEach((v, i) => {
+    const cx = padL + slot * i + slot / 2;
+    const x = cx - bw / 2;
+    const yv = padT + ((maxV - v) / span) * plotH;
+    const top = Math.min(yv, y0), h = Math.abs(yv - y0);
+    const color = v >= 0 ? '#38d39f' : '#ff6b81';
+    svg += `<rect x="${x.toFixed(1)}" y="${top.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(1, h).toFixed(1)}" rx="5" fill="${color}"/>`;
+    const vy = v >= 0 ? top - 6 : top + h + 14;
+    svg += `<text x="${cx.toFixed(1)}" y="${vy.toFixed(1)}" text-anchor="middle" font-size="11" font-weight="700" fill="${color}">${fmtKRW(v)}</text>`;
+    svg += `<text x="${cx.toFixed(1)}" y="${(H - 24).toFixed(1)}" text-anchor="middle" font-size="12" fill="#e6ecf7">${labels[i]}</text>`;
+  });
+  svg += `</svg>`;
+  el.innerHTML = svg;
 }
 
 function renderBroken() {
