@@ -3,38 +3,42 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>상장숏 거래 수익률 리포트</title>
+<title>상장숏 · 거래 수익률 리포트 — Netbitrage</title>
 <style>
-  :root { --pos:#12b886; --neg:#e5484d; --ink:#1b2230; --mut:#8a94a6; --line:#eceff4; --card:#fff; --bg:#f5f7fb; }
-  * { box-sizing:border-box; }
-  body { margin:0; font-family:'Malgun Gothic','Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--ink); }
-  .wrap { max-width:1000px; margin:0 auto; padding:32px 20px 60px; }
-  header h1 { font-size:24px; margin:0 0 4px; }
+  :root { --bg:#0f1420; --panel:#1a2233; --panel2:#212c42; --line:#2c3a56; --txt:#e6ecf7; --mut:#93a2c0; --pos:#38d39f; --neg:#ff6b81; --accent:#5b9dff; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Segoe UI","Malgun Gothic",system-ui,sans-serif; background:var(--bg); color:var(--txt); }
+  .wrap { max-width:1040px; margin:0 auto; padding:28px 20px 60px; }
+  header h1 { font-size:22px; margin:0 0 4px; }
   header .sub { color:var(--mut); font-size:13px; }
-  .cards { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:24px 0; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 18px; box-shadow:0 1px 2px rgba(20,30,60,.04); }
+  .method { color:var(--mut); font-size:12px; margin:8px 0 20px; padding:6px 10px; background:var(--panel); border:1px solid var(--line); border-radius:8px; display:inline-block; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin:22px 0; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; }
   .card .k { color:var(--mut); font-size:12px; margin-bottom:6px; }
   .card .v { font-size:22px; font-weight:700; letter-spacing:-.5px; }
   .pos { color:var(--pos); } .neg { color:var(--neg); } .muted { color:var(--mut); font-weight:400; font-size:13px; }
-  .panel { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin:18px 0; }
-  h2 { font-size:16px; margin:26px 0 12px; }
-  table.tbl { width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; font-size:13px; }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin:18px 0; }
+  .panel svg { width:100%; height:auto; display:block; }
+  h2 { font-size:16px; margin:26px 0 12px; font-weight:700; }
+  table.tbl { width:100%; border-collapse:collapse; background:var(--panel); border:1px solid var(--line); border-radius:12px; overflow:hidden; font-size:13px; }
   .tbl th, .tbl td { padding:9px 10px; border-bottom:1px solid var(--line); text-align:left; white-space:nowrap; }
-  .tbl th { background:#fafbfe; color:var(--mut); font-weight:600; font-size:12px; }
+  .tbl th { background:var(--panel2); color:var(--mut); font-weight:600; font-size:12px; }
   .tbl td.num, .tbl th.num { text-align:right; font-variant-numeric:tabular-nums; }
   .tbl td.sym { font-weight:700; }
+  .tbl tbody tr:hover { background:var(--panel2); }
   .tbl tr:last-child td { border-bottom:none; }
   .small th, .small td { font-size:12px; }
-  footer { color:var(--mut); font-size:12px; margin-top:24px; }
+  footer { color:var(--mut); font-size:12px; margin-top:24px; line-height:1.7; }
   @media (max-width:720px) { .cards { grid-template-columns:repeat(2,1fr); } }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>상장숏 봇 · 거래 수익률 리포트</h1>
-    <div class="sub">생성 2026-08-26 13:34 · 데이터 trade_log.xlsx · 청산 완료 16건 (전체 53행)</div>
+    <h1>상장숏 · 거래 수익률 리포트</h1>
+    <div class="sub">생성 2026-08-26 · 청산 완료 16건</div>
   </header>
+  <div class="method">업비트 신규 상장 SHORT · 실거래 체결 기록 기반 · 수익률 = 투입마진 대비 실현손익 (레버리지 2x 반영)</div>
 
   <div class="cards">
     <div class="card"><div class="k">총 실현손익</div><div class="v pos">+224.87 <span style="font-size:13px">USDT</span></div></div>
@@ -52,14 +56,14 @@
   <div class="panel">
     <div class="k muted" style="margin-bottom:8px;">누적 실현손익 (USDT) — 청산 순서</div>
     <svg viewBox="0 0 900 320" width="100%" preserveAspectRatio="xMidYMid meet" role="img">
-  <line x1="55" y1="265.0" x2="880" y2="265.0" stroke="#eef1f6" stroke-width="1"/><text x="47" y="269.0" text-anchor="end" font-size="11" fill="#8a94a6">0</text><line x1="55" y1="216.0" x2="880" y2="216.0" stroke="#eef1f6" stroke-width="1"/><text x="47" y="220.0" text-anchor="end" font-size="11" fill="#8a94a6">56</text><line x1="55" y1="167.0" x2="880" y2="167.0" stroke="#eef1f6" stroke-width="1"/><text x="47" y="171.0" text-anchor="end" font-size="11" fill="#8a94a6">111</text><line x1="55" y1="118.0" x2="880" y2="118.0" stroke="#eef1f6" stroke-width="1"/><text x="47" y="122.0" text-anchor="end" font-size="11" fill="#8a94a6">167</text><line x1="55" y1="69.0" x2="880" y2="69.0" stroke="#eef1f6" stroke-width="1"/><text x="47" y="73.0" text-anchor="end" font-size="11" fill="#8a94a6">223</text><line x1="55" y1="20.0" x2="880" y2="20.0" stroke="#eef1f6" stroke-width="1"/><text x="47" y="24.0" text-anchor="end" font-size="11" fill="#8a94a6">278</text>
+  <line x1="55" y1="265.0" x2="880" y2="265.0" stroke="#2c3a56" stroke-width="1"/><text x="47" y="269.0" text-anchor="end" font-size="11" fill="#93a2c0">0</text><line x1="55" y1="216.0" x2="880" y2="216.0" stroke="#2c3a56" stroke-width="1"/><text x="47" y="220.0" text-anchor="end" font-size="11" fill="#93a2c0">56</text><line x1="55" y1="167.0" x2="880" y2="167.0" stroke="#2c3a56" stroke-width="1"/><text x="47" y="171.0" text-anchor="end" font-size="11" fill="#93a2c0">111</text><line x1="55" y1="118.0" x2="880" y2="118.0" stroke="#2c3a56" stroke-width="1"/><text x="47" y="122.0" text-anchor="end" font-size="11" fill="#93a2c0">167</text><line x1="55" y1="69.0" x2="880" y2="69.0" stroke="#2c3a56" stroke-width="1"/><text x="47" y="73.0" text-anchor="end" font-size="11" fill="#93a2c0">223</text><line x1="55" y1="20.0" x2="880" y2="20.0" stroke="#2c3a56" stroke-width="1"/><text x="47" y="24.0" text-anchor="end" font-size="11" fill="#93a2c0">278</text>
   <polygon points="55.0,265.0 55.0,264.5 110.0,264.5 165.0,263.4 220.0,258.2 275.0,252.1 330.0,212.8 385.0,189.8 440.0,173.9 495.0,175.8 550.0,175.2 605.0,161.1 660.0,127.7 715.0,123.9 770.0,20.0 825.0,150.7 880.0,67.1 880.0,265.0" fill="url(#g)" opacity="0.18"/>
-  <line x1="55" y1="265.0" x2="880" y2="265.0" stroke="#c2c9d6" stroke-dasharray="4 4"/>
-  <polyline points="55.0,264.5 110.0,264.5 165.0,263.4 220.0,258.2 275.0,252.1 330.0,212.8 385.0,189.8 440.0,173.9 495.0,175.8 550.0,175.2 605.0,161.1 660.0,127.7 715.0,123.9 770.0,20.0 825.0,150.7 880.0,67.1" fill="none" stroke="#4c6ef5" stroke-width="2.5"/>
-  <circle cx="55.0" cy="264.5" r="3" fill="#12b886"/><circle cx="110.0" cy="264.5" r="3" fill="#12b886"/><circle cx="165.0" cy="263.4" r="3" fill="#12b886"/><circle cx="220.0" cy="258.2" r="3" fill="#12b886"/><circle cx="275.0" cy="252.1" r="3" fill="#12b886"/><circle cx="330.0" cy="212.8" r="3" fill="#12b886"/><circle cx="385.0" cy="189.8" r="3" fill="#12b886"/><circle cx="440.0" cy="173.9" r="3" fill="#12b886"/><circle cx="495.0" cy="175.8" r="3" fill="#12b886"/><circle cx="550.0" cy="175.2" r="3" fill="#12b886"/><circle cx="605.0" cy="161.1" r="3" fill="#12b886"/><circle cx="660.0" cy="127.7" r="3" fill="#12b886"/><circle cx="715.0" cy="123.9" r="3" fill="#12b886"/><circle cx="770.0" cy="20.0" r="3" fill="#12b886"/><circle cx="825.0" cy="150.7" r="3" fill="#12b886"/><circle cx="880.0" cy="67.1" r="3" fill="#12b886"/>
-  <text x="55.0" y="283.0" text-anchor="middle" font-size="10" fill="#8a94a6" transform="rotate(35 55.0 283.0)">PRL</text><text x="110.0" y="283.0" text-anchor="middle" font-size="10" fill="#8a94a6" transform="rotate(35 110.0 283.0)">MEGA</text><text x="165.0" y="283.0" text-anchor="middle" font-size="10" fill="#8a94a6" transform="rotate(35 165.0 283.0)">WIF</text><text x="220.0" y="283.0" text-anchor="middle" font-size="10" fill="#8a94a6" transform="rotate(35 220.0 283.0)">VVV</text><text x="275.0" y="283.0" text-anchor="middle" font-size="10" fill="#8a94a6" transform="rotate(35 275.0 283.0)">IRYS</text><text x="330.0" y="283.0" text-anchor="middle" font-size="10" fill="#8a94a6" transform="rotate(35 330.0 283.0)">IO</text><text x="385.0" y="283.0" text-anchor="middle" font-size="10" fill="#8a94a6" transform="rotate(35 385.0 283.0)">BABY</text><text x="440.0" y="283.0" text-anchor="middle" font-size="10" fill="#8a94a6" transform="rotate(35 440.0 283.0)">OPG</text><text x="495.0" y="283.0" text-anchor="middle" font-size="10" fill="#8a94a6" transform="rotate(35 495.0 283.0)">SPX</text><text x="550.0" y="283.0" text-anchor="middle" font-size="10" fill="#8a94a6" transform="rotate(35 550.0 283.0)">RE</text><text x="605.0" y="283.0" text-anchor="middle" font-size="10" fill="#8a94a6" transform="rotate(35 605.0 283.0)">KMNO</text><text x="660.0" y="283.0" text-anchor="middle" font-size="10" fill="#8a94a6" transform="rotate(35 660.0 283.0)">BSB</text><text x="715.0" y="283.0" text-anchor="middle" font-size="10" fill="#8a94a6" transform="rotate(35 715.0 283.0)">XAN</text><text x="770.0" y="283.0" text-anchor="middle" font-size="10" fill="#8a94a6" transform="rotate(35 770.0 283.0)">PROM</text><text x="825.0" y="283.0" text-anchor="middle" font-size="10" fill="#8a94a6" transform="rotate(35 825.0 283.0)">CRV</text><text x="880.0" y="283.0" text-anchor="middle" font-size="10" fill="#8a94a6" transform="rotate(35 880.0 283.0)">LIT</text>
+  <line x1="55" y1="265.0" x2="880" y2="265.0" stroke="#4a5a7d" stroke-dasharray="4 4"/>
+  <polyline points="55.0,264.5 110.0,264.5 165.0,263.4 220.0,258.2 275.0,252.1 330.0,212.8 385.0,189.8 440.0,173.9 495.0,175.8 550.0,175.2 605.0,161.1 660.0,127.7 715.0,123.9 770.0,20.0 825.0,150.7 880.0,67.1" fill="none" stroke="#5b9dff" stroke-width="2.5"/>
+  <circle cx="55.0" cy="264.5" r="3" fill="#38d39f"/><circle cx="110.0" cy="264.5" r="3" fill="#38d39f"/><circle cx="165.0" cy="263.4" r="3" fill="#38d39f"/><circle cx="220.0" cy="258.2" r="3" fill="#38d39f"/><circle cx="275.0" cy="252.1" r="3" fill="#38d39f"/><circle cx="330.0" cy="212.8" r="3" fill="#38d39f"/><circle cx="385.0" cy="189.8" r="3" fill="#38d39f"/><circle cx="440.0" cy="173.9" r="3" fill="#38d39f"/><circle cx="495.0" cy="175.8" r="3" fill="#38d39f"/><circle cx="550.0" cy="175.2" r="3" fill="#38d39f"/><circle cx="605.0" cy="161.1" r="3" fill="#38d39f"/><circle cx="660.0" cy="127.7" r="3" fill="#38d39f"/><circle cx="715.0" cy="123.9" r="3" fill="#38d39f"/><circle cx="770.0" cy="20.0" r="3" fill="#38d39f"/><circle cx="825.0" cy="150.7" r="3" fill="#38d39f"/><circle cx="880.0" cy="67.1" r="3" fill="#38d39f"/>
+  <text x="55.0" y="283.0" text-anchor="middle" font-size="10" fill="#93a2c0" transform="rotate(35 55.0 283.0)">PRL</text><text x="110.0" y="283.0" text-anchor="middle" font-size="10" fill="#93a2c0" transform="rotate(35 110.0 283.0)">MEGA</text><text x="165.0" y="283.0" text-anchor="middle" font-size="10" fill="#93a2c0" transform="rotate(35 165.0 283.0)">WIF</text><text x="220.0" y="283.0" text-anchor="middle" font-size="10" fill="#93a2c0" transform="rotate(35 220.0 283.0)">VVV</text><text x="275.0" y="283.0" text-anchor="middle" font-size="10" fill="#93a2c0" transform="rotate(35 275.0 283.0)">IRYS</text><text x="330.0" y="283.0" text-anchor="middle" font-size="10" fill="#93a2c0" transform="rotate(35 330.0 283.0)">IO</text><text x="385.0" y="283.0" text-anchor="middle" font-size="10" fill="#93a2c0" transform="rotate(35 385.0 283.0)">BABY</text><text x="440.0" y="283.0" text-anchor="middle" font-size="10" fill="#93a2c0" transform="rotate(35 440.0 283.0)">OPG</text><text x="495.0" y="283.0" text-anchor="middle" font-size="10" fill="#93a2c0" transform="rotate(35 495.0 283.0)">SPX</text><text x="550.0" y="283.0" text-anchor="middle" font-size="10" fill="#93a2c0" transform="rotate(35 550.0 283.0)">RE</text><text x="605.0" y="283.0" text-anchor="middle" font-size="10" fill="#93a2c0" transform="rotate(35 605.0 283.0)">KMNO</text><text x="660.0" y="283.0" text-anchor="middle" font-size="10" fill="#93a2c0" transform="rotate(35 660.0 283.0)">BSB</text><text x="715.0" y="283.0" text-anchor="middle" font-size="10" fill="#93a2c0" transform="rotate(35 715.0 283.0)">XAN</text><text x="770.0" y="283.0" text-anchor="middle" font-size="10" fill="#93a2c0" transform="rotate(35 770.0 283.0)">PROM</text><text x="825.0" y="283.0" text-anchor="middle" font-size="10" fill="#93a2c0" transform="rotate(35 825.0 283.0)">CRV</text><text x="880.0" y="283.0" text-anchor="middle" font-size="10" fill="#93a2c0" transform="rotate(35 880.0 283.0)">LIT</text>
   <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="#4c6ef5"/><stop offset="100%" stop-color="#ffffff"/>
+    <stop offset="0%" stop-color="#5b9dff"/><stop offset="100%" stop-color="#0f1420"/>
   </linearGradient></defs>
 </svg>
   </div>
